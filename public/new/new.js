@@ -5,18 +5,19 @@ var name = document.getElementById('name').textContent;
 var image = document.getElementById('image');
 image.addEventListener('change', function (e) {
     var file = e.target.files[0];
-    var storageRef = firebase.storage().ref('images/' + file.name);
+    var storageRef = firebase.storage().ref('/images/' + file.name);
 });
 
 var audio = document.getElementById('audio');
 audio.addEventListener('change', function (e) {
     var file = e.target.files[0];
-    var storageRef = firebase.storage().ref('audio/' + file.name);
+    var storageRef = firebase.storage().ref('/audio/' + file.name);
     ready = true;
 });
 
 var submit = document.getElementById('submit');
 submit.addEventListener('click', () => {
+    console.log(ready);
     if (ready) {
         var postData = {
             artist: artist,
@@ -27,7 +28,7 @@ submit.addEventListener('click', () => {
         };
 
         // Get a key for a new Post.
-        var newPostKey = firebase.database().ref().child('posts').push().key;
+        var newPostKey = firebase.database().ref().child('posts/').push().key;
 
         // Write the new post's data
         var updates = {};
